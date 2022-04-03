@@ -8,16 +8,22 @@
 	<title>Superkvíz</title>
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body
 
+  onload="prvniOtazka()">
 
 	<h1>Superkvíz</h1>
 
-	<!-- přidat <div> pro kvíz -->
-	<!-- do něj přidat <div>y pro samotné držení otázky -->
-	<!-- také nezapomenout na <div> pro výsledek a hodnocení -->
+  
+	  <!-- přidat <div> pro kvíz -->
+	  <!-- do něj přidat <div>y pro samotné držení otázky -->
+	  <!-- také nezapomenout na <div> pro výsledek a hodnocení -->
 
-	<script src="kviz.js"></script>
+  <div class="kviz"></div>
+      <ul class="odpovedi" onclick=" dalsiOtazka()"  ></ul>
+  </div>
+
+	<script src="superkviz.js"></script>
 
 </body>
 </html>
