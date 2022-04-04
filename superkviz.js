@@ -1,25 +1,27 @@
 let cisloOtazky = 0
 let odpovedi = document.querySelector('.odpovedi');
 let kviz = document.querySelector('.kviz');
-let poleOdpovedi = [];
 
 let poleKviz = [
   {
     otazka: 'Jaké je největší jezero na světě?', foto: 'obrazky/jezero.jpg',
-    poleOdpovedi: ['Velké medvědí jezero', 'Kaspické moře', 'VIktoriino jezero'],
+    poleMoznosti: ['Velké medvědí jezero', 'Kaspické moře', 'VIktoriino jezero'],
     spravnaOdpoved: 1
   },
   {
     otazka: 'Jaká budova nepatří mezi scény Národního divadla?', foto: 'obrazky/Národní divadlo.jpg',
-    poleOdpovedi: ['Stavovské divadlo', 'Státní opera Praha', 'Rudolfinum'],
+    poleMoznosti: ['Stavovské divadlo', 'Státní opera Praha', 'Rudolfinum'],
     spravnaOdpoved: 2
   }
 ]
 
-function pokracuj() {
+//cisloSpravneOdpovediPrvniOtazky = poleKviz[0].spravnaOdpoved
+//poleKviz[0].poleMoznosti[cisloSpravneOdpovediPrvniOtazky]
+
+function pokracuj(event) {
+  console.log(event.srcElement.getAttribute('data-odpoved'))
   if (cisloOtazky < poleKviz.length - 1) {
     kviz.innerHTML = ''
-    odpovedi.innerHTML = ''
     cisloOtazky = cisloOtazky + 1
     napisOtazku()
   } else {
@@ -28,32 +30,43 @@ function pokracuj() {
 }
 
 function napisOtazku() {
-  const otazka = document.createElement('h2');
+
+  const otazka = document.createElement('div');
   otazka.id = ('otazka');
   otazka.innerHTML = poleKviz[cisloOtazky].otazka
-
-  const fotoKOtazce = document.createElement('img');
-  fotoKOtazce.classList.add('obrazek');
-  fotoKOtazce.classList.add('foto');
-  fotoKOtazce.src = poleKviz[cisloOtazky].foto;
-  fotoKOtazce.alt = poleKviz[cisloOtazky].otazka;
+  kviz.appendChild(otazka);
+  //kviz.insertAdjacentElement(2, otazka);
 
   const poradi = document.createElement('div');
   poradi.id = ('poradi');
   poradi.textContent = 'OTÁZKA' + ' ' + (cisloOtazky + 1) + '/' + poleKviz.length;
-  otazka.appendChild(poradi)
+  otazka.appendChild(poradi);
+  //otazka.insertAdjacentElement(2, poradi);
+   
+  const fotoKOtazce = document.createElement('img');
+  fotoKOtazce.id = ('obrazek');
+  fotoKOtazce.classList.add('foto');
+  fotoKOtazce.src = poleKviz[cisloOtazky].foto;
+  fotoKOtazce.alt = poleKviz[cisloOtazky].otazka;
   otazka.appendChild(fotoKOtazce);
+  
+  const odpovedi = document.createElement('ul');
+  odpovedi.id = ('odpovedi'); 
+  otazka.appendChild(odpovedi);
 
-  for (let i = 0; i < poleKviz[cisloOtazky].poleOdpovedi.length; i++) {
-    const odpoved = document.createElement('li');
-    odpoved.classList.add = ('.odpovedi');
-    odpoved.innerHTML += poleKviz[cisloOtazky].poleOdpovedi[i];
+  for (let i = 0; i < poleKviz[cisloOtazky].poleMoznosti.length; i++) {
+    const moznosti = document.createElement('li');
+    moznosti.id = ('moznosti');
+    
+    moznosti.setAttribute('data-odpoved', i)
+    moznosti.onclick = pokracuj;
 
-    odpovedi.appendChild(odpoved);
-    otazka.appendChild(odpovedi);
-    kviz.appendChild(otazka);
+    moznosti.innerHTML += poleKviz[cisloOtazky].poleMoznosti[i];
+    odpovedi.appendChild(moznosti);
   }
+  
 }
+
 
 
 

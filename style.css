@@ -71,7 +71,7 @@ h1 {
 	margin-right: 30px;
 }
 
-.obrazek {
+#obrazek {
 	padding: 5px;
 	width: 100%;
 	height: auto;
@@ -83,14 +83,14 @@ h1 {
 	flex: 1;
 }
 
-.odpovedi {
+#odpovedi {
 	margin: 0;
 	padding: 0;
 	font-size: 24px;
 	list-style: none;
 }
 
-.odpovedi li {
+#odpovedi li {
 	margin: 0 0 20px 0;
 	padding: 10px 30px;
 	background-color: var(--seda);
@@ -99,7 +99,7 @@ h1 {
 	transform: translateX(0);
 }
 
-.odpovedi li:hover {
+#odpovedi li:hover {
 	background-color: var(--cervena);
 	color: white;
 	cursor: pointer;
