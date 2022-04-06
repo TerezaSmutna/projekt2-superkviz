@@ -1,6 +1,7 @@
 let cisloOtazky = 0
 let odpovedi = document.querySelector('.odpovedi');
 let kviz = document.querySelector('.kviz');
+let poleMoznosti = [];
 
 let poleKviz = [
   {
@@ -19,22 +20,27 @@ let poleKviz = [
 //poleKviz[0].poleMoznosti[cisloSpravneOdpovediPrvniOtazky]
 
 function pokracuj(event) {
-  poleKviz.forEach(element => {
-    element.skutecnaOdpoved = parseInt((event.srcElement.getAttribute('data-odpoved')))
-  });
-  console.log(poleKviz);
 
-  if (cisloOtazky < poleKviz.length - 1) {
+let moznosti = event.target;
+let odpoved = moznosti.dataset.odpoved;
+
+  poleKviz.forEach(element => {
+    element.skutecnaOdpoved;
+});
+
+poleKviz[cisloOtazky].skutecnaOdpoved = parseInt(odpoved);
+
+if (cisloOtazky < poleKviz.length - 1) {
     kviz.innerHTML = ''
     cisloOtazky = cisloOtazky + 1
-    napisOtazku()
+    napisOtazku();
   } else {
-    alert('vypisHodnoceni')
+    vyhodnot();
   }
 }
 
-function napisOtazku() {
 
+function napisOtazku() {
   const otazka = document.createElement('div');
   otazka.id = ('otazka');
   otazka.innerHTML = poleKviz[cisloOtazky].otazka
@@ -44,7 +50,7 @@ function napisOtazku() {
   const poradi = document.createElement('div');
   poradi.id = ('poradi');
   poradi.textContent = 'OTÁZKA' + ' ' + (cisloOtazky + 1) + '/' + poleKviz.length;
-  otazka.appendChild(poradi);
+  otazka.appendChild(poradi); 
   //otazka.insertAdjacentElement(2, poradi);
 
   const fotoKOtazce = document.createElement('img');
@@ -62,14 +68,24 @@ function napisOtazku() {
     const moznosti = document.createElement('li');
     moznosti.id = ('moznosti');
 
-    moznosti.setAttribute('data-odpoved', i)
-    moznosti.onclick = pokracuj;
+    moznosti.setAttribute('data-odpoved', i);
+    moznosti.addEventListener('click', pokracuj);
+     //moznosti.onclick = pokracuj;
 
     moznosti.innerHTML += poleKviz[cisloOtazky].poleMoznosti[i];
     odpovedi.appendChild(moznosti);
   }
 }
 
+function vyhodnot() {
+  kviz.innerHTML = ''
+  for (let i = 0; i < poleKviz.length; i++) {
+    const hodnoceniNadpis = document.createElement('div');
+    hodnoceniNadpis.classList.add('vysledek');
+    kviz.appendChild(hodnoceniNadpis);
+    hodnoceniNadpis.textContent = 'TVOJE HODNOCENÍ';
+  }
+}
 
 
 
