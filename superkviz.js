@@ -45,7 +45,6 @@ let otazka = document.createElement('h2');
 otazka.id = ('otazka');
 
 function napisOtazku() {
-
   otazka.innerHTML = poleKviz[cisloOtazky].otazka
   kviz.appendChild(otazka);
   //kviz.insertAdjacentElement(2, otazka);
