@@ -21,6 +21,10 @@ let poleKviz = [
   },
 ]
 
+poleKviz.forEach(element => {
+  element.skutecnaOdpoved;
+});
+
 //cisloSpravneOdpovediPrvniOtazky = poleKviz[0].spravnaOdpoved
 //poleKviz[0].poleMoznosti[cisloSpravneOdpovediPrvniOtazky]
 
@@ -29,10 +33,6 @@ function pokracuj(event) {
   let moznosti = event.target;
   let odpoved = moznosti.dataset.odpoved;
 
-  poleKviz.forEach(element => {
-    element.skutecnaOdpoved;
-  });
-
   poleKviz[cisloOtazky].skutecnaOdpoved = parseInt(odpoved);
 
   if (cisloOtazky < poleKviz.length - 1) {
@@ -40,12 +40,11 @@ function pokracuj(event) {
     cisloOtazky = cisloOtazky + 1
     napisOtazku();
   } else {
-    //kviz.textContent = ''
     vyhodnot();
   }
 }
 
-let otazka = document.createElement('div');
+let otazka = document.createElement('h2');
 otazka.id = ('otazka');
 
 function napisOtazku() {
@@ -85,19 +84,37 @@ function napisOtazku() {
 }
 
 function vyhodnot() {
-  otazka.innerHTML = poleKviz[cisloOtazky].otazka
+  kviz.removeChild(otazka);
+
   let skutecnaOdpoved = poleKviz.skutecnaOdpoved;
   let spravnaOdpoved = poleKviz.spravnaOdpoved;
+  let vyhodnoceni = document.createElement('div');
+  kviz.appendChild(vyhodnoceni);
 
-  //for (let i = 0; i < poleKviz.length; i++) {
-  for (let i = 0; i < 1; i++) {
-    let tvojehodnoceni = document.querySelector('#tvojehodnoceni');
-    tvojehodnoceni.textContent = 'TVOJE HODNOCENÍ';
-    
-    let otazkaHodnoceni = document.querySelector('.vysledek');
-    otazkaHodnoceni.textContent = (i + 1) + '. ' + poleKviz[i].otazka;
+  let tvojeHodnoceni = document.createElement('h2');
+  tvojeHodnoceni.textContent = 'TVOJE HODNOCENÍ';
+  vyhodnoceni.appendChild(tvojeHodnoceni);
 
-    let hodnoceni = document.createElement('div');
+  let otazkyHodnoceni = document.createElement('ol');
+  otazkyHodnoceni.type = "1";
+
+  for (let i = 0; i < poleKviz.length; i++) {
+    let otazkaHodnoceni = document.createElement('li');
+    otazkyHodnoceni.appendChild(otazkaHodnoceni);
+    otazkaHodnoceni.classList.add('h3');
+    otazkaHodnoceni.innerHTML = poleKviz[i].otazka;
+    vyhodnoceni.appendChild(otazkaHodnoceni);
+
+    let porovnani = document.createElement('div');
+    porovnani.textContent  = 'ahoj';
+    otazkaHodnoceni.appendChild(porovnani);
+
+  }
+}
+
+
+
+  /**for (let i = 0; i < poleKviz.length; i++) {
 
     let dobraOdpoved = ('Správná odpověď: ' + spravnaOdpoved);
 
@@ -105,16 +122,14 @@ function vyhodnot() {
     hodnoceni.textContent = 'Tvoje odpověď: ' + poleKviz[i].skutecnaOdpoved + '<br>' + dobraOdpoved;
 
     if (skutecnaOdpoved == spravnaOdpoved) {
-      dobraOdpoved = true;
       dobraOdpoved.textContent = 'To je SPRÁVNĚ.'
     }
-  }
 
   let procentoUspesnosti = document.createElement('div');
   //procentoUspesnosti.id = ('');
-  procentoUspesnosti.textContent = 'SPRÁVNĚ' + 1 + 'ZE' + poleKviz.length + 'OTÁZEK. ÚSPĚŠNOST' + 33 + '%.'
+  procentoUspesnosti.textContent = 'SPRÁVNĚ' + X + 'ZE' + poleKviz.length + 'OTÁZEK. ÚSPĚŠNOST' + Y + '%.'
 
-}
+}**/
 
 
 
