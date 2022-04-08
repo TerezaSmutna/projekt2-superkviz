@@ -25,11 +25,8 @@ poleKviz.forEach(element => {
   element.skutecnaOdpoved;
 });
 
-//cisloSpravneOdpovediPrvniOtazky = poleKviz[0].spravnaOdpoved
-//poleKviz[0].poleMoznosti[cisloSpravneOdpovediPrvniOtazky]
 
 function pokracuj(event) {
-
   let moznosti = event.target;
   let odpoved = moznosti.dataset.odpoved;
 
@@ -85,9 +82,8 @@ function napisOtazku() {
 
 function vyhodnot() {
   kviz.removeChild(otazka);
+  let pocetSpravnychOdpovedi = 0;
 
-  let skutecnaOdpoved = poleKviz.skutecnaOdpoved;
-  let spravnaOdpoved = poleKviz.spravnaOdpoved;
   let vyhodnoceni = document.createElement('div');
   kviz.appendChild(vyhodnoceni);
 
@@ -102,34 +98,27 @@ function vyhodnot() {
     let otazkaHodnoceni = document.createElement('li');
     otazkyHodnoceni.appendChild(otazkaHodnoceni);
     otazkaHodnoceni.classList.add('h3');
-    otazkaHodnoceni.innerHTML = poleKviz[i].otazka;
+    otazkaHodnoceni.innerHTML = poleKviz[i].otazka + '<br>';
     vyhodnoceni.appendChild(otazkaHodnoceni);
 
-    let porovnani = document.createElement('div');
-    porovnani.textContent  = 'ahoj';
-    otazkaHodnoceni.appendChild(porovnani);
+    let porovnani1 = document.createElement('div');
+    let porovnani2 = document.createElement('div');
+    porovnani2.innerHTML = 'Správná odpověď: ' + poleKviz[i].poleMoznosti[poleKviz[i].spravnaOdpoved];
+    porovnani1.innerHTML = 'Tvoje odpověď: ' + poleKviz[i].poleMoznosti[poleKviz[i].skutecnaOdpoved];
+    otazkaHodnoceni.appendChild(porovnani1);
+    otazkaHodnoceni.appendChild(porovnani2);
 
-  }
-}
-
-
-
-  /**for (let i = 0; i < poleKviz.length; i++) {
-
-    let dobraOdpoved = ('Správná odpověď: ' + spravnaOdpoved);
-
-    hodnoceni.id = ('hodnoceni');
-    hodnoceni.textContent = 'Tvoje odpověď: ' + poleKviz[i].skutecnaOdpoved + '<br>' + dobraOdpoved;
-
-    if (skutecnaOdpoved == spravnaOdpoved) {
-      dobraOdpoved.textContent = 'To je SPRÁVNĚ.'
+    if (poleKviz[i].skutecnaOdpoved === poleKviz[i].spravnaOdpoved) {
+      pocetSpravnychOdpovedi = pocetSpravnychOdpovedi + 1;
+      porovnani2.textContent = 'To je SPRÁVNĚ.'
     }
+  }
 
   let procentoUspesnosti = document.createElement('div');
-  //procentoUspesnosti.id = ('');
-  procentoUspesnosti.textContent = 'SPRÁVNĚ' + X + 'ZE' + poleKviz.length + 'OTÁZEK. ÚSPĚŠNOST' + Y + '%.'
+  vyhodnoceni.appendChild(procentoUspesnosti);
+  procentoUspesnosti.innerHTML = 'SPRÁVNĚ ' + pocetSpravnychOdpovedi + ' ZE ' + poleKviz.length + ' OTÁZEK. ÚSPĚŠNOST ' + Math.round((pocetSpravnychOdpovedi / poleKviz.length) * 100) + '%.'
+}
 
-}**/
 
 
 
