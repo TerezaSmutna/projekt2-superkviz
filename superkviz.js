@@ -83,12 +83,12 @@ function vyhodnot() {
   kviz.removeChild(otazka);
   let pocetSpravnychOdpovedi = 0;
 
-  let vyhodnoceni = document.createElement('div');
-  kviz.appendChild(vyhodnoceni);
+  //let vyhodnoceni = document.createElement('div');
+  //kviz.appendChild(vyhodnoceni);
 
   let tvojeHodnoceni = document.createElement('h2');
   tvojeHodnoceni.textContent = 'TVOJE HODNOCENÍ';
-  vyhodnoceni.appendChild(tvojeHodnoceni);
+  kviz.appendChild(tvojeHodnoceni);
 
   let otazkyHodnoceni = document.createElement('ol');
   otazkyHodnoceni.type = "1";
@@ -97,11 +97,11 @@ function vyhodnot() {
     let otazkaHodnoceni = document.createElement('li');
     otazkyHodnoceni.appendChild(otazkaHodnoceni);
     otazkaHodnoceni.classList.add('h3');
-    otazkaHodnoceni.innerHTML = poleKviz[i].otazka + '<br>';
-    vyhodnoceni.appendChild(otazkaHodnoceni);
+    otazkaHodnoceni.innerHTML = poleKviz[i].otazka;
+    tvojeHodnoceni.appendChild(otazkyHodnoceni);
 
-    let porovnani1 = document.createElement('div');
-    let porovnani2 = document.createElement('div');
+    let porovnani1 = document.createElement('p');
+    let porovnani2 = document.createElement('p');
     porovnani2.innerHTML = 'Správná odpověď: ' + poleKviz[i].poleMoznosti[poleKviz[i].spravnaOdpoved];
     porovnani1.innerHTML = 'Tvoje odpověď: ' + poleKviz[i].poleMoznosti[poleKviz[i].skutecnaOdpoved];
     otazkaHodnoceni.appendChild(porovnani1);
@@ -114,7 +114,7 @@ function vyhodnot() {
   }
 
   let procentoUspesnosti = document.createElement('div');
-  vyhodnoceni.appendChild(procentoUspesnosti);
+  tvojeHodnoceni.appendChild(procentoUspesnosti);
   procentoUspesnosti.innerHTML = 'SPRÁVNĚ ' + pocetSpravnychOdpovedi + ' ZE ' + poleKviz.length + ' OTÁZEK. ÚSPĚŠNOST ' + Math.round((pocetSpravnychOdpovedi / poleKviz.length) * 100) + '%.'
 }
 
