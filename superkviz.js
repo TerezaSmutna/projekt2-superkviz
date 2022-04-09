@@ -1,3 +1,4 @@
+let otazka = document.createElement('h2');
 let cisloOtazky = 0
 let odpovedi = document.querySelector('.odpovedi');
 let kviz = document.querySelector('.kviz');
@@ -25,11 +26,9 @@ poleKviz.forEach(element => {
   element.skutecnaOdpoved;
 });
 
-
 function pokracuj(event) {
   let moznosti = event.target;
   let odpoved = moznosti.dataset.odpoved;
-
   poleKviz[cisloOtazky].skutecnaOdpoved = parseInt(odpoved);
 
   if (cisloOtazky < poleKviz.length - 1) {
@@ -41,19 +40,16 @@ function pokracuj(event) {
   }
 }
 
-let otazka = document.createElement('h2');
-otazka.id = ('otazka');
-
 function napisOtazku() {
-  otazka.innerHTML = poleKviz[cisloOtazky].otazka
-  kviz.appendChild(otazka);
-  //kviz.insertAdjacentElement(2, otazka);
-
   let poradi = document.createElement('div');
   poradi.id = ('poradi');
   poradi.textContent = 'OTÁZKA' + ' ' + (cisloOtazky + 1) + '/' + poleKviz.length;
-  otazka.appendChild(poradi);
-  //otazka.insertAdjacentElement(2, poradi);
+  kviz.appendChild(poradi);
+
+  otazka.id = ('otazka');
+  otazka.innerHTML = poleKviz[cisloOtazky].otazka
+  kviz.appendChild(otazka);
+  otazka.insertAdjacentElement('beforebegin', poradi);
 
   let fotoKOtazce = document.createElement('img');
   fotoKOtazce.id = ('obrazek');
@@ -69,11 +65,8 @@ function napisOtazku() {
   for (let i = 0; i < poleKviz[cisloOtazky].poleMoznosti.length; i++) {
     let moznosti = document.createElement('li');
     moznosti.id = ('moznosti');
-
     moznosti.setAttribute('data-odpoved', i);
     moznosti.addEventListener('click', pokracuj);
-    //moznosti.onclick = pokracuj;
-
     moznosti.innerHTML += poleKviz[cisloOtazky].poleMoznosti[i];
     odpovedi.appendChild(moznosti);
   }
@@ -81,17 +74,15 @@ function napisOtazku() {
 
 function vyhodnot() {
   kviz.removeChild(otazka);
+  kviz.removeChild(poradi);
   let pocetSpravnychOdpovedi = 0;
-
-  //let vyhodnoceni = document.createElement('div');
-  //kviz.appendChild(vyhodnoceni);
 
   let tvojeHodnoceni = document.createElement('h2');
   tvojeHodnoceni.textContent = 'TVOJE HODNOCENÍ';
   kviz.appendChild(tvojeHodnoceni);
 
   let otazkyHodnoceni = document.createElement('ol');
-  otazkyHodnoceni.type = "1";
+  //otazkyHodnoceni.type = "1";
 
   for (let i = 0; i < poleKviz.length; i++) {
     let otazkaHodnoceni = document.createElement('li');
